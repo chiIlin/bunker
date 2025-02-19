@@ -1,20 +1,98 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="using:bunker.ViewModels"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="bunker.Views.MainWindow"
-        x:DataType="vm:MainWindowViewModel"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="bunker">
+        x:Class="bunker.MainWindow"
+        Title="Home"
+        Width="800" Height="500">
 
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+	<Grid>
+		<!-- Rows: 
+             Row 0 for top bar 
+             Row 1 for the main content -->
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<!-- TOP BAR -->
+		<Border Grid.Row="0" Background="#2F2F2F" Height="50">
+			<Grid>
+				<!-- "Home" text on the left -->
+				<TextBlock Text="Home"
+                           VerticalAlignment="Center"
+                           Foreground="White"
+                           Margin="15,0,0,0"
+                           FontSize="16" />
 
+				<!-- Trash icon button on the right -->
+				<Button Content="🗑"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Margin="0,0,15,0"
+                        Background="Transparent"
+                        BorderBrush="Transparent"
+                        Foreground="White" />
+			</Grid>
+		</Border>
+
+		<!-- MAIN CONTENT (Row 1) -->
+		<Grid Grid.Row="1" Background="#4F4F4F">
+			<!-- Two columns: 2/3 for left, 1/3 for right -->
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="2*"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+
+			<!-- PROFILE AREA (left column) -->
+			<StackPanel Grid.Column="0"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="10">
+
+				<!-- Circular border for the profile image -->
+				<Border Width="140" Height="140"
+                        CornerRadius="70"
+                        BorderBrush="White"
+                        BorderThickness="2">
+					<!-- Replace with your actual image path or binding -->
+					<Image Source="avares://bunker/Assets/profile.jpg"
+                           Stretch="Fill"/>
+				</Border>
+
+				<!-- Nickname text -->
+				<TextBlock Text="Nickname"
+                           Foreground="White"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"/>
+			</StackPanel>
+
+			<!-- BUTTONS (right column) -->
+			<StackPanel Grid.Column="1"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Spacing="15">
+
+				<!-- Give each button a name if you want to handle clicks in code -->
+				<Button x:Name="StartGameButton"
+                        Content="Start game"
+                        Background="#FFA16C"
+                        Width="140" Height="40"/>
+
+				<Button x:Name="SettingsButton"
+                        Content="Settings"
+                        Background="#FFA16C"
+                        Width="140" Height="40"/>
+
+				<Button x:Name="FriendsButton"
+                        Content="Friends"
+                        Background="#FFA16C"
+                        Width="140" Height="40"/>
+
+				<Button x:Name="RulesButton"
+                        Content="Rules"
+                        Background="#FFA16C"
+                        Width="140" Height="40"/>
+			</StackPanel>
+		</Grid>
+	</Grid>
 </Window>
